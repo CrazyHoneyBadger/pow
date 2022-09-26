@@ -52,3 +52,6 @@ func (s POWServer) ValidateMessage(version, message string) error {
 func (s POWServer) GetComplexity() int {
 	return s.complexity
 }
+func (s POWServer) GetVersion() string {
+	return VERSION
+}

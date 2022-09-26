@@ -29,3 +29,6 @@ func (c POWClient) SignMessage(version, message string, complexity int) (string,
 	}
 	return "", ErrMaxIterationOverflow
 }
+func (c POWClient) GetVersion() string {
+	return VERSION
+}
