@@ -10,22 +10,22 @@ const (
 	letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~=+%^*/()[]{}/!@#$?|" // Не добовлять символы не из ASCII
 )
 
-type POWSever struct {
+type POWServer struct {
 	lengthUniqueKey int
 	complexity      int
 }
 
-func NewPOWServer(lengthUniqueKey, complexity int) *POWSever {
+func NewPOWServer(lengthUniqueKey, complexity int) *POWServer {
 	if lengthUniqueKey < 0 || complexity < 0 {
 		lengthUniqueKey = 0
 		complexity = 0
 	}
-	return &POWSever{
+	return &POWServer{
 		lengthUniqueKey: lengthUniqueKey,
 		complexity:      complexity,
 	}
 }
-func (s POWSever) GenerateUniqKey() string {
+func (s POWServer) GenerateUniqKey() string {
 	if s.lengthUniqueKey == 0 {
 		return ""
 	}
@@ -36,7 +36,7 @@ func (s POWSever) GenerateUniqKey() string {
 	}
 	return uniqKey.String()
 }
-func (s POWSever) ValidateMessage(version, message string) error {
+func (s POWServer) ValidateMessage(version, message string) error {
 	if s.lengthUniqueKey == 0 || s.complexity == 0 {
 		return nil
 	}
@@ -48,4 +48,7 @@ func (s POWSever) ValidateMessage(version, message string) error {
 		return ErrHash
 	}
 	return nil
+}
+func (s POWServer) GetComplexity() int {
+	return s.complexity
 }
